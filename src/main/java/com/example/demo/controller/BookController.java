@@ -21,7 +21,7 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @PostMapping("/book")
+    @PostMapping("/book") /*save*/
     public Book createBook(@Valid @RequestBody Book book){
         return bookService.saveOrUpdateBook(book);
     }
