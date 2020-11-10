@@ -1,5 +1,5 @@
 package com.example.demo.models;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -8,9 +8,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table (name = "books")
+@Table(name = "books")
 public class Book implements Serializable {
-
 
 
     @Id
@@ -26,14 +25,15 @@ public class Book implements Serializable {
 
     private Integer price;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "author_id", nullable = false)
+
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    /* @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)*/
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private Author author;
 
-    public Book()
-    {}
+    public Book() {
+    }
 
 
     public Integer getId() {

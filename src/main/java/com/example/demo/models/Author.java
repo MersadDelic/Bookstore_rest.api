@@ -1,5 +1,5 @@
 package com.example.demo.models;
-import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -25,7 +25,7 @@ public class Author implements Serializable
 
 
     @OneToMany (cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            /*fetch = FetchType.LAZY,*/
             mappedBy = "author")
     private Set<Book> books = new HashSet<>();
 
@@ -65,6 +65,10 @@ public class Author implements Serializable
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+
+        for (Book b : books) {
+            b.setAuthor(this);
+        }
     }
 
 }
