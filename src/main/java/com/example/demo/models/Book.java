@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -11,7 +12,6 @@ import java.io.Serializable;
 @Table(name = "books")
 public class Book implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -20,21 +20,19 @@ public class Book implements Serializable {
     @Size(max = 45)
     private String title;
 
-
     private Integer year;
 
     private Integer price;
-
 
     @ManyToOne
     @JoinColumn(name = "author_id")
     /* @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)*/
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties ({"name", "address", "books"}) // angularu vrati samo id authora (ne ostale atribute)
     private Author author;
 
     public Book() {
     }
-
 
     public Integer getId() {
         return id;

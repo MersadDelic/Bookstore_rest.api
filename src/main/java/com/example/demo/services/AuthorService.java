@@ -5,6 +5,7 @@ import com.example.demo.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -20,7 +21,6 @@ public class AuthorService {
     }
 
     public boolean delete(Integer Id) {
-
         try {
             authorRepository.deleteById(Id);
             return true;
@@ -33,14 +33,8 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    public boolean findById(Integer Id) {
-
-        try {
-            authorRepository.findById(Id);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public Optional<Author>getById(Integer Id) {
+        return authorRepository.findById(Id);
     }
 
 

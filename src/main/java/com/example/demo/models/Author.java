@@ -1,18 +1,18 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 @Table(name = "authors")
 public class Author implements Serializable
 {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,17 +23,14 @@ public class Author implements Serializable
     @Size(max = 45)
     private String address;
 
-
     @OneToMany (cascade = CascadeType.ALL,
-            /*fetch = FetchType.LAZY,*/
+            fetch = FetchType.LAZY,
             mappedBy = "author")
-    private Set<Book> books = new HashSet<>();
-
+    @JsonIgnore
+    private List<Book> books = new ArrayList<>();
 
     public Author()
     {}
-
-
 
     public Integer getId() {
         return id;
@@ -59,11 +56,11 @@ public class Author implements Serializable
         this.address = address;
     }
 
-    public Set<Book> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<Book> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
 
         for (Book b : books) {
