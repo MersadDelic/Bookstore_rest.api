@@ -24,7 +24,7 @@ public class BookController {
     public ResponseEntity<Book> saveOrUpdateBook(
             @RequestBody Book book) {
 
-        return new ResponseEntity<Book>(
+        return new ResponseEntity<>(
                 bookService.saveOrUpdateBook(book),
                 HttpStatus.CREATED);
     }

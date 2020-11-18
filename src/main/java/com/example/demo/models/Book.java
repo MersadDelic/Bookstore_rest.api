@@ -20,12 +20,10 @@ public class Book implements Serializable {
     @Size(max = 45)
     private String title;
 
-    private Integer year;
-
     private Integer price;
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author")
     /* @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)*/
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnoreProperties ({"name", "address", "books"}) // angularu vrati samo id authora (ne ostale atribute)
@@ -48,14 +46,6 @@ public class Book implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Integer getYear() {
-        return year;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
     }
 
     public Integer getPrice() {
