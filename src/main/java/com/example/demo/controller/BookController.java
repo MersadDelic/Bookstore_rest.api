@@ -24,7 +24,7 @@ public class BookController {
     public ResponseEntity<Book> saveOrUpdateBook(
             @RequestBody Book book) {
 
-        return new ResponseEntity<>(
+        return new ResponseEntity<Book>(
                 bookService.saveOrUpdateBook(book),
                 HttpStatus.CREATED);
     }
@@ -38,7 +38,7 @@ public class BookController {
 
     @DeleteMapping("/book/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable Integer id) {
-        return new ResponseEntity<>(
+        return new ResponseEntity<Boolean>(
                 bookService.delete(id),
                 HttpStatus.OK);
     }
