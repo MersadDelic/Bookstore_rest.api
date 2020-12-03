@@ -1,9 +1,11 @@
 package com.example.demo.services;
+
 import com.example.demo.models.Book;
 import com.example.demo.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -11,7 +13,6 @@ public class BookService {
     private final BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
-
         this.bookRepository = bookRepository;
     }
 
@@ -19,8 +20,7 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public boolean delete(Integer Id) {
-
+    public boolean delete(Long Id) {
         try {
             bookRepository.deleteById(Id);
             return true;
@@ -29,6 +29,11 @@ public class BookService {
         }
     }
 
-    public List<Book> findAll() { return bookRepository.findAll();
+    public List<Book> findAll() {
+        return bookRepository.findAll();
+    }
+
+    public Optional<Book> getById(Long Id) {
+        return bookRepository.findById(Id);
     }
 }
