@@ -23,10 +23,13 @@ public class Book implements Serializable {
     private Integer price;
 
     @ManyToOne
-    @JoinColumn(name = "author")
-    /* @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)*/
+    @JoinColumn(name = "author_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties ({"name", "address", "books"}) // angularu vrati samo id authora (ne ostale atribute)
+    /*
+    @JsonProperty ("authorId")
+    @JsonIdentityInfo (generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference (alwaysAsId = true) */
+    @JsonIgnoreProperties ({"address", "books"})
     private Author author;
 
     public Book() {
